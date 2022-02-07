@@ -1,7 +1,6 @@
 import { Button, Heading } from "@chakra-ui/react";
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import AnimalCard from "../components/AnimalCard";
 import getAnimals from "../fetch/getAnimals";
@@ -19,12 +18,17 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
   const { total_pages } = pagination;
   const hasNextPage = total_pages > currentPage;
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const getMoreAnimals = async () => {
     if (!hasNextPage) return;
+    setIsLoading(true);
     const moreAnimals = (await getAnimals({ page: currentPage + 1 })).animals;
     setAllAnimals((prev) => [...prev, ...moreAnimals]);
     setCurrentPage((prev) => prev + 1);
+    setIsLoading(false);
   };
+
   return (
     <>
       <Head>
@@ -35,7 +39,11 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
       {allAnimals.map((animal) => (
         <AnimalCard key={animal.id} animal={animal} />
       ))}
-      {hasNextPage ? <Button onClick={getMoreAnimals}>More</Button> : null}
+      {!hasNextPage ? null : (
+        <Button isLoading={isLoading} onClick={getMoreAnimals}>
+          More
+        </Button>
+      )}
     </>
   );
 };
