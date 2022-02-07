@@ -35,7 +35,7 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
         <title>Pet Finder</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Heading>Hello world!</Heading>
+      <Heading as="h1">Pet Finder</Heading>
       {allAnimals.map((animal) => (
         <AnimalCard key={animal.id} animal={animal} />
       ))}
