@@ -12,12 +12,14 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import React from "react";
+import getBreeds from "../fetch/getBreeds";
 import {
   AnimalParams,
   MultiChoiceAnimalParam,
   SingleChoiceAnimalParam,
 } from "../types/animals";
 import { ANIMAL_TYPES } from "../utils/constants";
+import useFetchFilter from "../utils/useFetchFilter";
 import TypeSelect from "./TypeSelect";
 
 interface FilterHeadingProps extends HeadingProps {}
@@ -34,7 +36,12 @@ interface FilterProps {
   filterMany: (field: MultiChoiceAnimalParam, values: string[]) => void;
 }
 
-const Filter: React.FC<FilterProps> = ({ params, filterOne, filterMany }) => {
+const Filter: React.FC<FilterProps> = ({
+  params: { type },
+  filterOne,
+  filterMany,
+}) => {
+  const values = useFetchFilter(type, getBreeds);
   return (
     <Accordion
       allowMultiple
@@ -51,7 +58,7 @@ const Filter: React.FC<FilterProps> = ({ params, filterOne, filterMany }) => {
         </AccordionButton>
         <AccordionPanel pb={4}>
           <RadioGroup
-            value={params.type}
+            value={type}
             onChange={(value) => filterOne("type", value)}
           >
             <Stack>
@@ -64,7 +71,7 @@ const Filter: React.FC<FilterProps> = ({ params, filterOne, filterMany }) => {
           </RadioGroup>
         </AccordionPanel>
       </AccordionItem>
-      {params.type === undefined ? null : (
+      {type === undefined ? null : (
         <>
           <AccordionItem>
             <AccordionButton>
@@ -76,7 +83,7 @@ const Filter: React.FC<FilterProps> = ({ params, filterOne, filterMany }) => {
             <AccordionPanel pb={4}>
               <TypeSelect
                 name="breed"
-                type={params.type}
+                values={values}
                 filterMany={filterMany}
               />
             </AccordionPanel>
@@ -89,11 +96,7 @@ const Filter: React.FC<FilterProps> = ({ params, filterOne, filterMany }) => {
               <AccordionIcon />
             </AccordionButton>
             <AccordionPanel pb={4}>
-              <TypeSelect
-                name="size"
-                type={params.type}
-                filterMany={filterMany}
-              />
+              <TypeSelect name="size" values={values} filterMany={filterMany} />
             </AccordionPanel>
           </AccordionItem>
         </>
