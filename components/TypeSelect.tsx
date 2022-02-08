@@ -1,10 +1,9 @@
-import { Spinner } from "@chakra-ui/react";
-import React from "react";
+import { useToast } from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import ReactSelect from "react-select";
 import getBreeds from "../fetch/getBreeds";
 import { MultiChoiceAnimalParam } from "../types/animals";
 import getSelectOptions, { Option } from "../utils/getSelectOptions";
-import useFetch from "../utils/useFetch";
 
 interface SelectProps {
   name: MultiChoiceAnimalParam;
@@ -13,13 +12,27 @@ interface SelectProps {
 }
 
 const TypeSelect: React.FC<SelectProps> = ({ name, type, filterMany }) => {
-  const [breeds, { loading }] = useFetch<string[]>(
-    () => getBreeds(type),
-    [],
-    [type]
-  );
+  const [breeds, setBreeds] = useState<string[]>([]);
+  const toast = useToast();
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const data = await getBreeds(type);
+        setBreeds(data);
+      } catch (err) {
+        toast({
+          title: "that didnt work",
+          description: "Try again?",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      }
+    };
+    fetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [type]);
 
-  if (loading) return <Spinner color="blue.500" />;
   if (breeds.length === 0) return null;
 
   const breedsOptions = getSelectOptions(breeds);

@@ -36,7 +36,12 @@ interface FilterProps {
 
 const Filter: React.FC<FilterProps> = ({ params, filterOne, filterMany }) => {
   return (
-    <Accordion allowMultiple defaultIndex={[0, 1]} w="300px" flex="300px 0 0">
+    <Accordion
+      allowMultiple
+      defaultIndex={[0, 1, 2]}
+      w="300px"
+      flex="300px 0 0"
+    >
       <AccordionItem>
         <AccordionButton>
           <Box flex="1" textAlign="left">
@@ -60,21 +65,38 @@ const Filter: React.FC<FilterProps> = ({ params, filterOne, filterMany }) => {
         </AccordionPanel>
       </AccordionItem>
       {params.type === undefined ? null : (
-        <AccordionItem>
-          <AccordionButton>
-            <Box flex="1" textAlign="left">
-              <FilterHeading>Breed</FilterHeading>
-            </Box>
-            <AccordionIcon />
-          </AccordionButton>
-          <AccordionPanel pb={4}>
-            <TypeSelect
-              name="breed"
-              type={params.type}
-              filterMany={filterMany}
-            />
-          </AccordionPanel>
-        </AccordionItem>
+        <>
+          <AccordionItem>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                <FilterHeading>Breed</FilterHeading>
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel pb={4}>
+              <TypeSelect
+                name="breed"
+                type={params.type}
+                filterMany={filterMany}
+              />
+            </AccordionPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                <FilterHeading>Size</FilterHeading>
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel pb={4}>
+              <TypeSelect
+                name="size"
+                type={params.type}
+                filterMany={filterMany}
+              />
+            </AccordionPanel>
+          </AccordionItem>
+        </>
       )}
     </Accordion>
   );
