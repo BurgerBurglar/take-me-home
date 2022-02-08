@@ -19,6 +19,7 @@ import {
   SingleChoiceAnimalParam,
 } from "../types/animals";
 import { ANIMAL_TYPES } from "../utils/constants";
+import splitParam from "../utils/splitParam";
 import useFetchFilter from "../utils/useFetchFilter";
 import TypeSelect from "./TypeSelect";
 
@@ -37,8 +38,9 @@ interface FilterProps {
 }
 
 const Filter: React.FC<FilterProps> = ({ params, filterOne, filterMany }) => {
-  const breeds = useFetchFilter(params.type, getBreeds);
-  const breedValues = params.breed?.split(",") ?? [];
+  const breedOptions = useFetchFilter(params.type, getBreeds);
+  const breedValues = splitParam(params, "breed");
+  const genderValues = splitParam(params, "gender");
   return (
     <Accordion
       allowMultiple
@@ -80,8 +82,24 @@ const Filter: React.FC<FilterProps> = ({ params, filterOne, filterMany }) => {
             <AccordionPanel pb={4}>
               <TypeSelect
                 name="breed"
-                options={breeds}
+                options={breedOptions}
                 values={breedValues}
+                filterMany={filterMany}
+              />
+            </AccordionPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                <FilterHeading>Gender</FilterHeading>
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel pb={4}>
+              <TypeSelect
+                name="gender"
+                options={["male", "female"]}
+                values={genderValues}
                 filterMany={filterMany}
               />
             </AccordionPanel>
