@@ -126,10 +126,12 @@ export interface AnimalParams {
   type?: string;
   breed?: string;
   size?: Size;
-  geneder?: Gender;
+  gender?: Gender;
   age?: Age;
   color?: string;
   name?: string;
   sort?: string;
   page?: number;
 }
+
+export type MultiChoiceAnimalParam = "breed" | "size" | "gender" | "color";

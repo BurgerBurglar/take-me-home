@@ -1,5 +1,4 @@
-import { useBoolean } from "@chakra-ui/react";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
 interface Props<Params, Data> {
   params: Params;

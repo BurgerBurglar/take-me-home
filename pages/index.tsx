@@ -45,7 +45,7 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
       </Head>
       <Heading as="h1">Pet Finder</Heading>
       <HStack align="flex-start">
-        <Filter params={params} filter={filter} />
+        <Filter params={params} filter={filter} setParams={setParams} />
         <Stack align="center">
           <AnimalList animals={allAnimals} />
           {!hasNextPage ? null : (
