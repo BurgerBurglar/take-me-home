@@ -36,12 +36,9 @@ interface FilterProps {
   filterMany: (field: MultiChoiceAnimalParam, values: string[]) => void;
 }
 
-const Filter: React.FC<FilterProps> = ({
-  params: { type },
-  filterOne,
-  filterMany,
-}) => {
-  const values = useFetchFilter(type, getBreeds);
+const Filter: React.FC<FilterProps> = ({ params, filterOne, filterMany }) => {
+  const breeds = useFetchFilter(params.type, getBreeds);
+  const breedValues = params.breed?.split(",") ?? [];
   return (
     <Accordion
       allowMultiple
@@ -58,7 +55,7 @@ const Filter: React.FC<FilterProps> = ({
         </AccordionButton>
         <AccordionPanel pb={4}>
           <RadioGroup
-            value={type}
+            value={params.type}
             onChange={(value) => filterOne("type", value)}
           >
             <Stack>
@@ -71,7 +68,7 @@ const Filter: React.FC<FilterProps> = ({
           </RadioGroup>
         </AccordionPanel>
       </AccordionItem>
-      {type === undefined ? null : (
+      {params.type === undefined ? null : (
         <>
           <AccordionItem>
             <AccordionButton>
@@ -83,20 +80,10 @@ const Filter: React.FC<FilterProps> = ({
             <AccordionPanel pb={4}>
               <TypeSelect
                 name="breed"
-                values={values}
+                options={breeds}
+                values={breedValues}
                 filterMany={filterMany}
               />
-            </AccordionPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                <FilterHeading>Size</FilterHeading>
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel pb={4}>
-              <TypeSelect name="size" values={values} filterMany={filterMany} />
             </AccordionPanel>
           </AccordionItem>
         </>
