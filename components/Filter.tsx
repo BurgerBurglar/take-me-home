@@ -24,10 +24,10 @@ const FilterHeading: React.FC<FilterHeadingProps> = ({ children }) => (
 
 interface FilterProps {
   params: AnimalParams;
-  handleChange: (value: string, field: string) => void;
+  filter: (value: string, field: string) => void;
 }
 
-const Filter: React.FC<FilterProps> = ({ params, handleChange }) => {
+const Filter: React.FC<FilterProps> = ({ params, filter: handleChange }) => {
   return (
     <Accordion allowMultiple defaultIndex={[0, 1]} w="300px" flex="300px 0 0">
       <AccordionItem>
