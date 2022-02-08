@@ -1,29 +1,36 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
 import {
+  Animal,
+  AnimalParams,
   MultiChoiceAnimalParam,
   SingleChoiceAnimalParam,
 } from "../types/animals";
 
-interface Props<Params, Data> {
-  params: Params;
-  setParams: Dispatch<SetStateAction<Params>>;
-  fetcher: (params: Params) => Promise<Data[]>;
-  setter: Dispatch<SetStateAction<Data[]>>;
+interface Props {
+  params: AnimalParams;
+  setParams: Dispatch<SetStateAction<AnimalParams>>;
+  fetcher: (AnimalParams: AnimalParams) => Promise<Animal[]>;
+  setter: Dispatch<SetStateAction<Animal[]>>;
 }
-const useFilter = <Params, Data>({
+const useFilter = <AnimalParams, Animal>({
   params,
   setParams,
   fetcher,
   setter,
-}: Props<Params, Data>) => {
+}: Props) => {
   useEffect(() => {
     (async () => {
-      const data = await fetcher(params);
-      setter(data);
+      const Animal = await fetcher(params);
+      setter(Animal);
     })();
   }, [fetcher, params, setter]);
 
   const filterOne = (field: SingleChoiceAnimalParam, value: string) => {
+    if (field === "type") {
+      setParams({
+        type: value,
+      });
+    }
     setParams((prev) => ({
       ...prev,
       [field]: value,
