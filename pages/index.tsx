@@ -4,8 +4,9 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import AnimalList from "../components/AnimalList";
 import Filter from "../components/Filter";
-import getAnimals from "../fetch/getAnimals";
+import getAnimalList, { getAnimals } from "../fetch/getAnimals";
 import { Animal, AnimalParams, Pagination } from "../types/animals";
+import usePagination from "../utils/usePagination";
 
 interface Props {
   animals: Animal[];
@@ -14,29 +15,27 @@ interface Props {
 
 const Home: NextPage<Props> = ({ animals, pagination }) => {
   const [allAnimals, setAllAnimals] = useState(animals);
-  const [currentPage, setCurrentPage] = useState(pagination.current_page);
-  const [isLoading, setIsLoading] = useState(false);
-
+  const initialPage = pagination.current_page;
+  const totalPages = pagination.total_pages;
   const [params, setParams] = useState<AnimalParams>({});
+
+  const { isLoading, hasNextPage, fetchNextPage } = usePagination<
+    AnimalParams,
+    Animal
+  >({
+    params,
+    initialPage,
+    totalPages,
+    fetcher: getAnimals,
+    setter: setAllAnimals,
+  });
+
   useEffect(() => {
     (async () => {
-      const { animals } = await getAnimals(params);
+      const { animals } = await getAnimalList(params);
       setAllAnimals(animals);
     })();
   }, [params]);
-
-  const { total_pages } = pagination;
-  const hasNextPage = total_pages > currentPage;
-
-  const getMoreAnimals = async () => {
-    if (!hasNextPage) return;
-    setIsLoading(true);
-    const moreAnimals = (await getAnimals({ ...params, page: currentPage + 1 }))
-      .animals;
-    setAllAnimals((prev) => [...prev, ...moreAnimals]);
-    setCurrentPage((prev) => prev + 1);
-    setIsLoading(false);
-  };
 
   const handleChange = (value: string, field: string) => {
     setParams((prev) => ({
@@ -57,7 +56,7 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
         <Stack align="center">
           <AnimalList animals={allAnimals} />
           {!hasNextPage ? null : (
-            <Button isLoading={isLoading} onClick={getMoreAnimals}>
+            <Button isLoading={isLoading} onClick={fetchNextPage}>
               More
             </Button>
           )}
@@ -68,7 +67,7 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  const { animals, pagination } = await getAnimals();
+  const { animals, pagination } = await getAnimalList();
   return {
     props: {
       animals,
