@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction, useEffect } from "react";
-import getAnimalList from "../fetch/getAnimals";
+import { useBoolean } from "@chakra-ui/react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 interface Props<Params, Data> {
   params: Params;
@@ -26,6 +26,6 @@ const useFilter = <Params, Data>({
       [field]: value,
     }));
   };
-  return filter;
+  return { filter };
 };
 export default useFilter;

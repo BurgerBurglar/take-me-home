@@ -1,7 +1,7 @@
 import { Button, Heading, HStack, Stack } from "@chakra-ui/react";
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AnimalList from "../components/AnimalList";
 import Filter from "../components/Filter";
 import getAnimalList, { getAnimals } from "../fetch/getAnimals";
@@ -20,7 +20,7 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
   const totalPages = pagination.total_pages;
   const [params, setParams] = useState<AnimalParams>({});
 
-  const { isLoading, hasNextPage, fetchNextPage } = usePagination<
+  const { isFetching, hasNextPage, fetchNextPage } = usePagination<
     AnimalParams,
     Animal
   >({
@@ -30,7 +30,7 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
     fetcher: getAnimals,
     setter: setAllAnimals,
   });
-  const filter = useFilter({
+  const { filter } = useFilter({
     params,
     setParams,
     fetcher: getAnimals,
@@ -49,7 +49,7 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
         <Stack align="center">
           <AnimalList animals={allAnimals} />
           {!hasNextPage ? null : (
-            <Button isLoading={isLoading} onClick={fetchNextPage}>
+            <Button isLoading={isFetching} onClick={fetchNextPage}>
               More
             </Button>
           )}

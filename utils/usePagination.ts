@@ -16,19 +16,19 @@ const usePagination = <Params, Data>({
   setter,
 }: Props<Params, Data>) => {
   const [currentPage, setCurrentPage] = useState(initialPage);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
   const hasNextPage = totalPages > currentPage;
 
   const fetchNextPage = async () => {
     if (!hasNextPage) return;
-    setIsLoading(true);
+    setIsFetching(true);
     const moreData = await fetcher({ ...params, page: currentPage + 1 });
     setter((prev) => [...prev, ...moreData]);
     setCurrentPage((prev) => prev + 1);
-    setIsLoading(false);
+    setIsFetching(false);
   };
   return {
-    isLoading,
+    isFetching,
     hasNextPage,
     fetchNextPage,
   };
