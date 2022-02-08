@@ -16,7 +16,7 @@ interface NavbarProps extends FlexProps {}
 const Navbar: React.FC<NavbarProps> = (props) => {
   return (
     <Flex {...props} bg="purple.600" align="center" color="white" h="3rem">
-      <Container maxW="container.lg" display="flex" alignContent="center">
+      <Container maxW="container.xl" display="flex" alignContent="center">
         <Heading as="h1" fontSize="2rem">
           Pet Finder
         </Heading>
