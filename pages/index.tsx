@@ -1,4 +1,4 @@
-import { Button, Heading, HStack, Stack } from "@chakra-ui/react";
+import { Button, HStack, Stack } from "@chakra-ui/react";
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
@@ -49,7 +49,6 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
         <title>Pet Finder</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Heading as="h1">Pet Finder</Heading>
       <HStack align="flex-start">
         <Filter params={params} filterOne={filterOne} filterMany={filterMany} />
         <Stack align="center">
