@@ -7,7 +7,6 @@ import Filter from "../components/Filter";
 import getAnimalList, { getAnimals } from "../fetch/getAnimals";
 import { Animal, AnimalParams, Pagination } from "../types/animals";
 import useFilter from "../utils/useFilter";
-import usePagination from "../utils/usePagination";
 
 interface Props {
   animals: Animal[];
@@ -17,19 +16,26 @@ interface Props {
 const Home: NextPage<Props> = ({ animals, pagination }) => {
   const [allAnimals, setAllAnimals] = useState(animals);
   const initialPage = pagination.current_page;
-  const totalPages = pagination.total_pages;
+  const initialTotalPages = pagination.total_pages;
   const [params, setParams] = useState<AnimalParams>({});
 
-  const { isFetching, hasNextPage, fetchNextPage } = usePagination<
-    AnimalParams,
-    Animal
-  >({
-    params,
-    initialPage,
-    totalPages,
-    fetcher: getAnimals,
-    setter: setAllAnimals,
-  });
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [totalPages, setTotalPages] = useState(initialTotalPages);
+  const [isFetching, setIsFetching] = useState(false);
+  const hasNextPage = totalPages > currentPage;
+  const fetchNextPage = async () => {
+    if (!hasNextPage) return;
+    setIsFetching(true);
+    const { animals: moreAnimals, pagination } = await getAnimalList({
+      ...params,
+      page: currentPage + 1,
+    });
+    setAllAnimals((prev) => [...prev, ...moreAnimals]);
+    setCurrentPage((prev) => prev + 1);
+    setTotalPages(pagination.total_pages);
+    setIsFetching(false);
+  };
+
   const { filterOne, filterMany } = useFilter({
     params,
     setParams,
