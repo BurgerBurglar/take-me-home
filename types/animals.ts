@@ -23,7 +23,7 @@ export interface Animal {
   organization_animal_id: null | string;
   photos: Photo[];
   primary_photo_cropped: Photo | null;
-  videos: any[];
+  videos: { embed: string }[];
   status: string;
   status_changed_at: string;
   published_at: string;
@@ -120,4 +120,16 @@ export interface Pagination {
 
 export interface PaginationLinks {
   next: Link;
+}
+
+export interface AnimalParams {
+  type?: string;
+  breed?: string;
+  size?: Size;
+  geneder?: Gender;
+  age?: Age;
+  color?: string;
+  name?: string;
+  sort?: string;
+  page?: number;
 }

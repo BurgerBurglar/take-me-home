@@ -1,5 +1,4 @@
 import { Flex, Heading, Stack, Tag, Text, Wrap } from "@chakra-ui/react";
-import { unescape } from "querystring";
 import React from "react";
 import { Animal } from "../types/animals";
 import htmlUnescape from "../utils/htmlUnescape";
@@ -21,7 +20,6 @@ const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
         rounded="md"
         overflow="hidden"
         shadow="md"
-        w="600px"
       >
         <NextImage
           src={animal.primary_photo_cropped!.small}
@@ -30,7 +28,7 @@ const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
           h="400px"
         />
         <Stack direction="column" spacing={2} justify="center" p={3}>
-          <Heading>{animal.name}</Heading>
+          <Heading as="h3">{animal.name}</Heading>
           <Text>{overview.join(" · ")}</Text>
           <Text>{animal.breeds.primary}</Text>
           <Wrap>

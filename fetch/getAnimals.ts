@@ -1,15 +1,15 @@
 import axios from "axios";
-import { AnimalList } from "../types/animals";
+import { AnimalList, AnimalParams } from "../types/animals";
 import getAnimalsWithPhoto from "../utils/getAnimalsWithPhoto";
 import getHeaders from "./getHeaders";
 
-const getAnimals = async (params: any = undefined) => {
+const getAnimals = async (params: AnimalParams = {}) => {
   const headers = await getHeaders();
   const response = await axios.get<AnimalList>(
     "https://api.petfinder.com/v2/animals",
     {
       headers,
-      params,
+      params: { ...params, page: 100 },
     }
   );
   const { animals, pagination } = response.data;
