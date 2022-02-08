@@ -9,7 +9,7 @@ export interface Animal {
   url: string;
   type: string;
   species: string;
-  breeds: Breeds;
+  breeds: Link;
   colors: Colors;
   age: Age;
   gender: Gender;
@@ -57,7 +57,7 @@ export interface Attributes {
   shots_current: boolean;
 }
 
-export interface Breeds {
+export interface Link {
   primary: string;
   secondary: null | string;
   mixed: boolean;
@@ -129,11 +129,30 @@ export interface AnimalParams {
   gender?: Gender;
   age?: Age;
   color?: string;
+  coat?: string;
   name?: string;
   sort?: string;
   page?: number;
 }
 
-export type SingleChoiceAnimalParam = "type" | "sort"; 
+export type SingleChoiceAnimalParam = "type" | "sort";
 
-export type MultiChoiceAnimalParam = "breed" | "size" | "gender" | "color";
+export type MultiChoiceAnimalParam =
+  | "breed"
+  | "size"
+  | "gender"
+  | "color"
+  | "coat";
+
+export interface AnimalType {
+  name: string;
+  coats: string[];
+  colors: string[];
+  genders: string[];
+  _links: Links;
+}
+
+export interface Links {
+  self: Link;
+  breeds: Link;
+}

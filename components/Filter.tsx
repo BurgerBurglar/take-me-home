@@ -12,6 +12,7 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import React from "react";
+import { getColors } from "../fetch/getAnimalTypeDetails";
 import getBreeds from "../fetch/getBreeds";
 import {
   AnimalParams,
@@ -40,11 +41,23 @@ interface FilterProps {
 const Filter: React.FC<FilterProps> = ({ params, filterOne, filterMany }) => {
   const breedOptions = useFetchFilter(params.type, getBreeds);
   const breedValues = splitParam(params, "breed");
+
+  const genderOptions = ["male", "female"];
   const genderValues = splitParam(params, "gender");
+
+  const colorOptions = useFetchFilter(params.type, getColors);
+  const colorValues = splitParam(params, "color");
+
+  const sizeOptions = ["small", "medium", "large", "xlarge"];
+  const sizeValues = splitParam(params, "size");
+
+  const coatsOptions = ["short", "medium", "long", "wire", "hairless", "curly"];
+  const coatsValues = splitParam(params, "coat");
+
   return (
     <Accordion
       allowMultiple
-      defaultIndex={[0, 1, 2]}
+      defaultIndex={[0, 1, 2, 3, 4, 5, 6]}
       w="300px"
       flex="300px 0 0"
     >
@@ -98,8 +111,56 @@ const Filter: React.FC<FilterProps> = ({ params, filterOne, filterMany }) => {
             <AccordionPanel pb={4}>
               <TypeSelect
                 name="gender"
-                options={["male", "female"]}
+                options={genderOptions}
                 values={genderValues}
+                filterMany={filterMany}
+              />
+            </AccordionPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                <FilterHeading>Color</FilterHeading>
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel pb={4}>
+              <TypeSelect
+                name="color"
+                options={colorOptions}
+                values={colorValues}
+                filterMany={filterMany}
+              />
+            </AccordionPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                <FilterHeading>Size</FilterHeading>
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel pb={4}>
+              <TypeSelect
+                name="size"
+                options={sizeOptions}
+                values={sizeValues}
+                filterMany={filterMany}
+              />
+            </AccordionPanel>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionButton>
+              <Box flex="1" textAlign="left">
+                <FilterHeading>Coat</FilterHeading>
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+            <AccordionPanel pb={4}>
+              <TypeSelect
+                name="coat"
+                options={coatsOptions}
+                values={coatsValues}
                 filterMany={filterMany}
               />
             </AccordionPanel>
