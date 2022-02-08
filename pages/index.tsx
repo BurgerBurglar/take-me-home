@@ -30,7 +30,7 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
     fetcher: getAnimals,
     setter: setAllAnimals,
   });
-  const { filter } = useFilter({
+  const { filterOne, filterMany } = useFilter({
     params,
     setParams,
     fetcher: getAnimals,
@@ -45,7 +45,7 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
       </Head>
       <Heading as="h1">Pet Finder</Heading>
       <HStack align="flex-start">
-        <Filter params={params} filter={filter} setParams={setParams} />
+        <Filter params={params} filterOne={filterOne} filterMany={filterMany} />
         <Stack align="center">
           <AnimalList animals={allAnimals} />
           {!hasNextPage ? null : (

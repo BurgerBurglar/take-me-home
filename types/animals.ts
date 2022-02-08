@@ -134,4 +134,6 @@ export interface AnimalParams {
   page?: number;
 }
 
+export type SingleChoiceAnimalParam = "type" | "sort"; 
+
 export type MultiChoiceAnimalParam = "breed" | "size" | "gender" | "color";

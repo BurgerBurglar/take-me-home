@@ -1,4 +1,8 @@
 import { Dispatch, SetStateAction, useEffect } from "react";
+import {
+  MultiChoiceAnimalParam,
+  SingleChoiceAnimalParam,
+} from "../types/animals";
 
 interface Props<Params, Data> {
   params: Params;
@@ -19,12 +23,20 @@ const useFilter = <Params, Data>({
     })();
   }, [fetcher, params, setter]);
 
-  const filter = (value: string, field: string) => {
+  const filterOne = (field: SingleChoiceAnimalParam, value: string) => {
     setParams((prev) => ({
       ...prev,
       [field]: value,
     }));
   };
-  return { filter };
+
+  const filterMany = (field: MultiChoiceAnimalParam, values: string[]) => {
+    setParams((prev) => ({
+      ...prev,
+      [field]: values.join(","),
+    }));
+  };
+
+  return { filterOne, filterMany };
 };
 export default useFilter;

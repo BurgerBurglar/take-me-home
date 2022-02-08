@@ -11,8 +11,12 @@ import {
   RadioGroup,
   Stack,
 } from "@chakra-ui/react";
-import React, { Dispatch, SetStateAction } from "react";
-import { AnimalParams, MultiChoiceAnimalParam } from "../types/animals";
+import React from "react";
+import {
+  AnimalParams,
+  MultiChoiceAnimalParam,
+  SingleChoiceAnimalParam,
+} from "../types/animals";
 import { ANIMAL_TYPES } from "../utils/constants";
 import TypeSelect from "./TypeSelect";
 
@@ -26,21 +30,11 @@ const FilterHeading: React.FC<FilterHeadingProps> = ({ children }) => (
 
 interface FilterProps {
   params: AnimalParams;
-  setParams: Dispatch<SetStateAction<AnimalParams>>;
-  filter: (value: string, field: string) => void;
+  filterOne: (value: SingleChoiceAnimalParam, field: string) => void;
+  filterMany: (field: MultiChoiceAnimalParam, values: string[]) => void;
 }
 
-const Filter: React.FC<FilterProps> = ({
-  params,
-  filter: handleChange,
-  setParams,
-}) => {
-  const setFilter = (field: MultiChoiceAnimalParam, values: string[]) => {
-    setParams((prev) => ({
-      ...prev,
-      [field]: values.join(","),
-    }));
-  };
+const Filter: React.FC<FilterProps> = ({ params, filterOne, filterMany }) => {
   return (
     <Accordion allowMultiple defaultIndex={[0, 1]} w="300px" flex="300px 0 0">
       <AccordionItem>
@@ -53,7 +47,7 @@ const Filter: React.FC<FilterProps> = ({
         <AccordionPanel pb={4}>
           <RadioGroup
             value={params.type}
-            onChange={(value) => handleChange(value, "type")}
+            onChange={(value) => filterOne("type", value)}
           >
             <Stack>
               {ANIMAL_TYPES.map((type) => (
@@ -74,7 +68,11 @@ const Filter: React.FC<FilterProps> = ({
             <AccordionIcon />
           </AccordionButton>
           <AccordionPanel pb={4}>
-            <TypeSelect name="breed" type={params.type} setFilter={setFilter} />
+            <TypeSelect
+              name="breed"
+              type={params.type}
+              filterMany={filterMany}
+            />
           </AccordionPanel>
         </AccordionItem>
       )}
