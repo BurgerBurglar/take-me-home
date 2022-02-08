@@ -22,6 +22,7 @@ const useFetch = <T>(
     };
     fetch();
     setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [...dependency]);
 
   return [value, { loading, error }];
