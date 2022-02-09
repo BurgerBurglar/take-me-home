@@ -37,6 +37,18 @@ const Intro: React.FC<IntroProps> = ({ animal, ...props }) => {
   const attributes = Object.entries(animal.attributes)
     .filter(([_, isTrue]) => isTrue)
     .map(([attribute]) => attribute.split("_").join(" "));
+
+  const H4: React.FC = ({ children }) => (
+    <Heading
+      as="h4"
+      fontSize="1.5rem"
+      color="gray.600"
+      fontFamily="Fuzzy Bubbles"
+    >
+      {children}
+    </Heading>
+  );
+
   return (
     <VStack
       align="start"
@@ -70,13 +82,12 @@ const Intro: React.FC<IntroProps> = ({ animal, ...props }) => {
         spacingX="5rem"
         spacingY="2rem"
         w="full"
+        fontFamily="Fuzzy Bubbles"
       >
         <Stack>
           {colors.length === 0 ? null : (
             <>
-              <Heading as="h4" fontSize="1.2rem" color="gray.600">
-                I look like...
-              </Heading>
+              <H4>I look like...</H4>
               <Text>{colors}</Text>
             </>
           )}
@@ -85,18 +96,15 @@ const Intro: React.FC<IntroProps> = ({ animal, ...props }) => {
         <Stack>
           {animal.coat === null ? null : (
             <>
-              <Heading as="h4" fontSize="1.2rem" color="gray.600">
-                My coat is...
-              </Heading>
+              <H4>My coat is...</H4>
+
               <Text>{animal.coat.toLowerCase()}</Text>
             </>
           )}
         </Stack>
 
         <Stack>
-          <Heading as="h4" fontSize="1.2rem" color="gray.600">
-            I&apos;m good with...
-          </Heading>
+          <H4>I&apos;m good with...</H4>
           <UnorderedList style={{ marginLeft: "1.5rem" }}>
             {goodWiths.map((goodWith) => (
               <ListItem key={goodWith}>{goodWith}</ListItem>
@@ -105,9 +113,7 @@ const Intro: React.FC<IntroProps> = ({ animal, ...props }) => {
         </Stack>
 
         <Stack>
-          <Heading as="h4" fontSize="1.2rem" color="gray.600">
-            I&apos;ve got...
-          </Heading>
+          <H4>I&apos;ve got...</H4>
           <UnorderedList style={{ marginLeft: "1.5rem" }}>
             {attributes.map((attribute) => (
               <ListItem key={attribute}>{attribute}</ListItem>

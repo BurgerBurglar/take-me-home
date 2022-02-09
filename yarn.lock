@@ -747,6 +747,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/fuzzy-bubbles@^4.5.2":
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/@fontsource/fuzzy-bubbles/-/fuzzy-bubbles-4.5.2.tgz#389222cf21b41a3e9e00bc8cf420560e54fb8521"
+  integrity sha512-QN7gyW6aYf3vEQeVao21lru8EqKCiNhocOFG3qa+AJQqvC1/fnvJTP7G3AF6uCoLZ8Q/Le0IR+qd92/G2QXwuw==
+
 "@humanwhocodes/config-array@^0.9.2":
   version "0.9.3"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/config-array/-/config-array-0.9.3.tgz#f2564c744b387775b436418491f15fce6601f63e"

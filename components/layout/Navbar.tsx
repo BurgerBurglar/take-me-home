@@ -126,7 +126,7 @@ const Navbar: React.FC = (props) => {
   return (
     <Flex {...props} bg="purple.600" align="center" color="white" h="3rem">
       <Container maxW="container.xl" display="flex" alignContent="center">
-        <Heading as="h1" fontSize="2rem">
+        <Heading as="h1" fontSize="2rem" fontFamily="Fuzzy Bubbles">
           <Link href="/">Take Me Home</Link>
         </Heading>
         <Spacer />

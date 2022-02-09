@@ -83,9 +83,11 @@ const Contact: React.FC<ContactProps> = ({ organization, ...props }) => {
           <Icon as={GiCat} width="5rem" height="5rem" p="1rem" />
         )}
       </Box>
-      <HStack fontSize="1.5rem" color="white">
+      <HStack fontSize="1.3rem" color="white">
         <FaPaw />
-        <Heading as="h3">Take me home!</Heading>
+        <Heading as="h3" fontFamily="Fuzzy Bubbles">
+          Take me home!
+        </Heading>
         <FaPaw />
       </HStack>
       <HStack textAlign="center">
