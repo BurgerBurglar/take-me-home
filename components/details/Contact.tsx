@@ -1,4 +1,5 @@
 import {
+  Box,
   Heading,
   HStack,
   Icon,
@@ -10,10 +11,12 @@ import {
 
 import React from "react";
 import { FaPaw } from "react-icons/fa";
+import { GiCat } from "react-icons/gi";
 import { MdLocationOn, MdMail, MdPhone } from "react-icons/md";
 import { Contact } from "../../types/animals";
 import { Organization, SocialMedia } from "../../types/Organization";
 import Blockquote from "../Blockquote";
+import NextImage from "../NextImage";
 import Link from "../NextLink";
 import GoogleMap from "./GoogleMap";
 import SocialIcon from "./SocialIcon";
@@ -34,15 +37,45 @@ const Contact: React.FC<ContactProps> = ({ organization, ...props }) => {
     })
   );
 
+  const image =
+    organization.photos.length === 0 ? undefined : organization.photos[0].small;
+
   return (
     <VStack
+      position="relative"
       bgColor="purple.600"
       color="gray.200"
       rounded="xl"
       textAlign="center"
       p={5}
+      pt="2rem"
       {...props}
     >
+      <Box
+        position="absolute"
+        top={0}
+        transform="translateY(-50%)"
+        roundedTopLeft="full"
+        roundedTopRight="full"
+        p="0.5rem"
+        pb={0}
+        bgColor="purple.600"
+      >
+        {image ? (
+          <NextImage
+            src={organization.photos[0].small}
+            alt={organization.name}
+            width="5rem"
+            height="5rem"
+            chakraProps={{
+              rounded: "full",
+              overflow: "hidden",
+            }}
+          />
+        ) : (
+          <Icon as={GiCat} width="5rem" height="5rem" p="1rem" />
+        )}
+      </Box>
       <HStack fontSize="1.5rem" color="white">
         <FaPaw />
         <Heading as="h3">Take me home!</Heading>
