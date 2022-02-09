@@ -29,7 +29,7 @@ const Navbar: React.FC = (props) => {
     const router = useRouter();
 
     const { params, setParams } = useParams();
-    const [name, setName] = useState("");
+    const [name, setName] = useState(params.name ?? "");
     const [zipcode, setZipcode] = useState("");
 
     const isValidLocation = zipcode.length === 5;
