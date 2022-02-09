@@ -8,7 +8,7 @@ import { useParams } from "../context/params";
 import getAnimalList, { getAnimals } from "../fetch/getAnimals";
 import { Animal, Pagination } from "../types/animals";
 import useFilter from "../utils/useFilter";
-import useLargeScreen from "../utils/useLargeScreen";
+import useScreenSize from "../utils/useScreenSize";
 
 interface Props {
   animals: Animal[];
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ animals, pagination }) => {
-  const isLargeScreen = useLargeScreen();
+  const isLargeScreen = useScreenSize("lg");
 
   const { params, setParams } = useParams();
 
