@@ -84,42 +84,39 @@ const Intro: React.FC<IntroProps> = ({ animal, ...props }) => {
         w="full"
         fontFamily="Fuzzy Bubbles"
       >
-        <Stack>
-          {colors.length === 0 ? null : (
-            <>
-              <H4>I look like...</H4>
-              <Text>{colors}</Text>
-            </>
-          )}
-        </Stack>
+        {colors.length === 0 ? null : (
+          <Stack>
+            <H4>I look like...</H4>
+            <Text>{colors}</Text>
+          </Stack>
+        )}
+        {animal.coat === null ? null : (
+          <Stack>
+            <H4>My coat is...</H4>
+            <Text>{animal.coat.toLowerCase()}</Text>
+          </Stack>
+        )}
+        {goodWiths.length === 0 ? null : (
+          <Stack>
+            <H4>I&apos;m good with...</H4>
+            <UnorderedList style={{ marginLeft: "1.5rem" }}>
+              {goodWiths.map((goodWith) => (
+                <ListItem key={goodWith}>{goodWith}</ListItem>
+              ))}
+            </UnorderedList>
+          </Stack>
+        )}
 
-        <Stack>
-          {animal.coat === null ? null : (
-            <>
-              <H4>My coat is...</H4>
-
-              <Text>{animal.coat.toLowerCase()}</Text>
-            </>
-          )}
-        </Stack>
-
-        <Stack>
-          <H4>I&apos;m good with...</H4>
-          <UnorderedList style={{ marginLeft: "1.5rem" }}>
-            {goodWiths.map((goodWith) => (
-              <ListItem key={goodWith}>{goodWith}</ListItem>
-            ))}
-          </UnorderedList>
-        </Stack>
-
-        <Stack>
-          <H4>I&apos;ve got...</H4>
-          <UnorderedList style={{ marginLeft: "1.5rem" }}>
-            {attributes.map((attribute) => (
-              <ListItem key={attribute}>{attribute}</ListItem>
-            ))}
-          </UnorderedList>
-        </Stack>
+        {attributes.length === 0 ? null : (
+          <Stack>
+            <H4>I&apos;ve got...</H4>
+            <UnorderedList style={{ marginLeft: "1.5rem" }}>
+              {attributes.map((attribute) => (
+                <ListItem key={attribute}>{attribute}</ListItem>
+              ))}
+            </UnorderedList>
+          </Stack>
+        )}
       </SimpleGrid>
     </VStack>
   );
