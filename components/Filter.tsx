@@ -62,6 +62,11 @@ const Filter: React.FC<FilterProps> = ({ params, filterOne, filterMany }) => {
       defaultIndex={isLargeScreen ? [0, 1, 2, 3, 4, 5, 6] : []}
       w={isLargeScreen ? "300px" : "full"}
       flex={isLargeScreen ? "300px 0 0" : undefined}
+      sx={{
+        h2: {
+          fontSize: "1.2rem",
+        },
+      }}
     >
       <AccordionItem>
         <AccordionButton>

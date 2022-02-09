@@ -27,7 +27,7 @@ const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
           h="300px"
         />
         <Stack direction="column" spacing={2} justify="center" p={5} pt={3}>
-          <Heading as="h3" color="purple.700">
+          <Heading as="h3" fontSize="1.8rem" color="purple.700">
             {animal.name}
             {animal.distance === null ? null : (
               <Box
@@ -40,8 +40,10 @@ const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
               </Box>
             )}
           </Heading>
-          <Text>{overview.join(" · ")}</Text>
-          <Text>{animal.breeds.primary}</Text>
+          <Box fontSize="0.9rem" color="gray.700">
+            <Text>{overview.join(" · ")}</Text>
+            <Text>{animal.breeds.primary}</Text>
+          </Box>
           <Wrap>
             {topTags.map((tag) => (
               <Tag key={tag}>{tag}</Tag>
