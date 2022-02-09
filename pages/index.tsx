@@ -1,12 +1,12 @@
-import { Button, HStack, Stack } from "@chakra-ui/react";
+import { Button, HStack } from "@chakra-ui/react";
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import AnimalList from "../components/AnimalList";
+import AnimalGrid from "../components/AnimalGrid";
 import Filter from "../components/Filter";
 import { useParams } from "../context/params";
 import getAnimalList, { getAnimals } from "../fetch/getAnimals";
-import { Animal, AnimalParams, Pagination } from "../types/animals";
+import { Animal, Pagination } from "../types/animals";
 import useFilter from "../utils/useFilter";
 
 interface Props {
@@ -53,14 +53,12 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
       </Head>
       <HStack align="flex-start">
         <Filter params={params} filterOne={filterOne} filterMany={filterMany} />
-        <Stack align="center">
-          <AnimalList animals={allAnimals} />
-          {!hasNextPage ? null : (
-            <Button isLoading={isFetching} onClick={fetchNextPage}>
-              More
-            </Button>
-          )}
-        </Stack>
+        <AnimalGrid animals={allAnimals} />
+        {!hasNextPage ? null : (
+          <Button isLoading={isFetching} onClick={fetchNextPage}>
+            More
+          </Button>
+        )}
       </HStack>
     </>
   );

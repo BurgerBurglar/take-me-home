@@ -1,4 +1,4 @@
-import { Stack } from "@chakra-ui/react";
+import { SimpleGrid } from "@chakra-ui/react";
 import React from "react";
 import { Animal } from "../types/animals";
 import AnimalCard from "./AnimalCard";
@@ -7,13 +7,13 @@ interface AnimalListProps {
   animals: Animal[];
 }
 
-const AnimalList: React.FC<AnimalListProps> = ({ animals }) => {
+const AnimalGrid: React.FC<AnimalListProps> = ({ animals }) => {
   return (
-    <Stack spacing={3}>
+    <SimpleGrid minChildWidth="300px" spacing={3} w="full">
       {animals.map((animal) => (
         <AnimalCard key={animal.id} animal={animal} />
       ))}
-    </Stack>
+    </SimpleGrid>
   );
 };
-export default AnimalList;
+export default AnimalGrid;

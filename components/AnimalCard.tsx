@@ -1,7 +1,6 @@
 import { Box, Flex, Heading, Stack, Tag, Text, Wrap } from "@chakra-ui/react";
 import React from "react";
 import { Animal } from "../types/animals";
-import htmlUnescape from "../utils/htmlUnescape";
 import NextImage from "./NextImage";
 
 interface AnimalCardProps {
@@ -11,10 +10,10 @@ interface AnimalCardProps {
 const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
   const overview = [animal.species, animal.gender, animal.age];
   const topTags = animal.tags.slice(0, 3);
-  const description = htmlUnescape(animal.description);
   return (
     <>
       <Flex
+        direction="column"
         border="1px"
         borderColor="gray.200"
         rounded="md"
@@ -24,8 +23,8 @@ const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
         <NextImage
           src={animal.primary_photo_cropped!.small}
           alt={animal.name}
-          w="300px"
-          h="400px"
+          w="full"
+          h="300px"
         />
         <Stack direction="column" spacing={2} justify="center" p={3}>
           <Heading as="h3" style={{ display: "inline" }}>
@@ -48,15 +47,6 @@ const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
               <Tag key={tag}>{tag}</Tag>
             ))}
           </Wrap>
-          <Text
-            as="blockquote"
-            noOfLines={4}
-            borderLeft="solid 0.5rem"
-            borderColor="gray.400"
-            pl={3}
-          >
-            {description}
-          </Text>
         </Stack>
       </Flex>
     </>
