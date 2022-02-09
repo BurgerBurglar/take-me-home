@@ -50,7 +50,7 @@ export interface SocialMedia {
   twitter: null | string;
   youtube: null | string;
   instagram: null | string;
-  pinterest: null;
+  pinterest: null | string;
 }
 
 export interface OrganizationLinks {
