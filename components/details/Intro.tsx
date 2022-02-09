@@ -3,6 +3,8 @@ import {
   HStack,
   Icon,
   ListItem,
+  SimpleGrid,
+  Stack,
   StackProps,
   Tag,
   Text,
@@ -63,38 +65,56 @@ const Intro: React.FC<IntroProps> = ({ animal, ...props }) => {
       <Heading as="h3" fontSize="1.5rem" color="purple.700">
         Let&apos;s get to know each other!
       </Heading>
-      {colors.length === 0 ? null : (
-        <>
-          <Heading as="h4" fontSize="1.2rem">
-            I look like...
+      <SimpleGrid
+        minChildWidth="15rem"
+        spacingX="5rem"
+        spacingY="2rem"
+        w="full"
+      >
+        <Stack>
+          {colors.length === 0 ? null : (
+            <>
+              <Heading as="h4" fontSize="1.2rem" color="gray.600">
+                I look like...
+              </Heading>
+              <Text>{colors}</Text>
+            </>
+          )}
+        </Stack>
+
+        <Stack>
+          {animal.coat === null ? null : (
+            <>
+              <Heading as="h4" fontSize="1.2rem" color="gray.600">
+                My coat is...
+              </Heading>
+              <Text>{animal.coat.toLowerCase()}</Text>
+            </>
+          )}
+        </Stack>
+
+        <Stack>
+          <Heading as="h4" fontSize="1.2rem" color="gray.600">
+            I&apos;m good with...
           </Heading>
-          <Text>{colors}</Text>
-        </>
-      )}
-      {animal.coat === null ? null : (
-        <>
-          <Heading as="h4" fontSize="1.2rem">
-            My coat is...
+          <UnorderedList style={{ marginLeft: "1.5rem" }}>
+            {goodWiths.map((goodWith) => (
+              <ListItem key={goodWith}>{goodWith}</ListItem>
+            ))}
+          </UnorderedList>
+        </Stack>
+
+        <Stack>
+          <Heading as="h4" fontSize="1.2rem" color="gray.600">
+            I&apos;ve got...
           </Heading>
-          <Text>{animal.coat.toLowerCase()}</Text>
-        </>
-      )}
-      <Heading as="h4" fontSize="1.2rem">
-        I&apos;m good with...
-      </Heading>
-      <UnorderedList style={{ marginLeft: "1.5rem" }}>
-        {goodWiths.map((goodWith) => (
-          <ListItem key={goodWith}>{goodWith}</ListItem>
-        ))}
-      </UnorderedList>
-      <Heading as="h4" fontSize="1.2rem">
-        I&apos;ve got...
-      </Heading>
-      <UnorderedList style={{ marginLeft: "1.5rem" }}>
-        {attributes.map((attribute) => (
-          <ListItem key={attribute}>{attribute}</ListItem>
-        ))}
-      </UnorderedList>
+          <UnorderedList style={{ marginLeft: "1.5rem" }}>
+            {attributes.map((attribute) => (
+              <ListItem key={attribute}>{attribute}</ListItem>
+            ))}
+          </UnorderedList>
+        </Stack>
+      </SimpleGrid>
     </VStack>
   );
 };
