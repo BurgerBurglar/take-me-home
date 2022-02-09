@@ -5,6 +5,7 @@ import {
   MultiChoiceAnimalParam,
   SingleChoiceAnimalParam,
 } from "../types/animals";
+import nullifyEmpty from "./nullifyEmpty";
 import useToastError from "./useToastError";
 
 interface Props {
@@ -33,21 +34,23 @@ const useFilter = <AnimalParams, Animal>({
   }, [params]);
 
   const filterOne = (field: SingleChoiceAnimalParam, value: string) => {
+    const realValue = nullifyEmpty(value);
     if (field === "type") {
       setParams({
-        type: value,
+        type: realValue,
       });
     }
     setParams((prev) => ({
       ...prev,
-      [field]: value,
+      [field]: realValue,
     }));
   };
 
   const filterMany = (field: MultiChoiceAnimalParam, values: string[]) => {
+    const realValues = nullifyEmpty(values);
     setParams((prev) => ({
       ...prev,
-      [field]: values.join(","),
+      [field]: realValues?.join(","),
     }));
   };
 
