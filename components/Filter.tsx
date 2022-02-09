@@ -66,6 +66,9 @@ const Filter: React.FC<FilterProps> = ({ params, filterOne, filterMany }) => {
         h2: {
           fontSize: "1.2rem",
         },
+        button: {
+          bgColor: "gray.100",
+        },
       }}
     >
       <AccordionItem>
