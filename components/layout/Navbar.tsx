@@ -3,22 +3,37 @@ import {
   Flex,
   Heading,
   HStack,
+  IconButton,
   Input,
   Select,
   Spacer,
   Text,
+  VisuallyHidden,
 } from "@chakra-ui/react";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { useParams } from "../../context/params";
+import { MdSearch } from "react-icons/md";
 
 const isValidLocation = (zipcode: string) => zipcode.length === 5;
 
 const Navbar: React.FC = (props) => {
   const { params, setParams } = useParams();
+  const [name, setName] = useState("");
   const [zipcode, setZipcode] = useState("");
+
+  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
 
   const handleZipcodeChange = (e: ChangeEvent<HTMLInputElement>) => {
     setZipcode(e.target.value);
+  };
+
+  const searchName = () => {
+    setParams((prev) => ({
+      ...prev,
+      name,
+    }));
   };
 
   useEffect(() => {
@@ -44,20 +59,46 @@ const Navbar: React.FC = (props) => {
         </Heading>
         <Spacer />
         <HStack spacing={3}>
-          <Text fontSize="1.2rem">zipcode:</Text>
+          <VisuallyHidden>name</VisuallyHidden>
+          <Input
+            name="name"
+            w="15em"
+            bgColor="purple.500"
+            placeholder="name..."
+            _placeholder={{
+              color: "gray.300",
+            }}
+            value={name}
+            onChange={handleNameChange}
+            onKeyDown={(e) => {
+              e.key === "Enter" && searchName();
+            }}
+          />
+          <IconButton
+            icon={<MdSearch />}
+            aria-label="search"
+            colorScheme="purple"
+            onClick={searchName}
+          />
+          <VisuallyHidden>zipcode</VisuallyHidden>
           <Input
             name="location"
             w="9em"
             bgColor="purple.500"
+            placeholder="zipcode..."
+            _placeholder={{
+              color: "gray.300",
+            }}
             value={zipcode}
             onChange={handleZipcodeChange}
           />
-          <Text fontSize="1.2rem">distance:</Text>
+          <VisuallyHidden>distance</VisuallyHidden>
           <Select
             name="distance"
             value={params.distance}
             onChange={handleDistanceChange}
             defaultValue={100}
+            w="8rem"
             sx={{
               option: {
                 bgColor: "purple.500",
