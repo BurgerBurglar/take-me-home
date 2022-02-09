@@ -1,5 +1,5 @@
 {
-  "name": "pet-finder",
+  "name": "take-me-home",
   "private": true,
   "scripts": {
     "dev": "next dev",

@@ -51,7 +51,7 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
   return (
     <>
       <Head>
-        <title>Pet Finder</title>
+        <title>Take Me Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Stack direction={isLargeScreen ? "row" : "column"} align="flex-start">
