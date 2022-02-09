@@ -10,6 +10,7 @@ import {
   Radio,
   RadioGroup,
   Stack,
+  VStack,
 } from "@chakra-ui/react";
 import React from "react";
 import { getColors } from "../fetch/getAnimalTypeDetails";
@@ -55,119 +56,121 @@ const Filter: React.FC<FilterProps> = ({ params, filterOne, filterMany }) => {
   const coatsValues = splitParam(params, "coat");
 
   return (
-    <Accordion
-      allowMultiple
-      defaultIndex={[0, 1, 2, 3, 4, 5, 6]}
-      w="300px"
-      flex="300px 0 0"
-    >
-      <AccordionItem>
-        <AccordionButton>
-          <Box flex="1" textAlign="left">
-            <FilterHeading>Type</FilterHeading>
-          </Box>
-          <AccordionIcon />
-        </AccordionButton>
-        <AccordionPanel pb={4}>
-          <RadioGroup
-            value={params.type}
-            onChange={(value) => filterOne("type", value)}
-          >
-            <Stack>
-              {ANIMAL_TYPES.map((type) => (
-                <Radio key={type} value={type}>
-                  {type}
-                </Radio>
-              ))}
-            </Stack>
-          </RadioGroup>
-        </AccordionPanel>
-      </AccordionItem>
-      {params.type === undefined ? null : (
-        <>
-          <AccordionItem>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                <FilterHeading>Breed</FilterHeading>
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel pb={4}>
-              <TypeSelect
-                name="breed"
-                options={breedOptions}
-                values={breedValues}
-                filterMany={filterMany}
-              />
-            </AccordionPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                <FilterHeading>Gender</FilterHeading>
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel pb={4}>
-              <TypeSelect
-                name="gender"
-                options={genderOptions}
-                values={genderValues}
-                filterMany={filterMany}
-              />
-            </AccordionPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                <FilterHeading>Color</FilterHeading>
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel pb={4}>
-              <TypeSelect
-                name="color"
-                options={colorOptions}
-                values={colorValues}
-                filterMany={filterMany}
-              />
-            </AccordionPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                <FilterHeading>Size</FilterHeading>
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel pb={4}>
-              <TypeSelect
-                name="size"
-                options={sizeOptions}
-                values={sizeValues}
-                filterMany={filterMany}
-              />
-            </AccordionPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <AccordionButton>
-              <Box flex="1" textAlign="left">
-                <FilterHeading>Coat</FilterHeading>
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-            <AccordionPanel pb={4}>
-              <TypeSelect
-                name="coat"
-                options={coatsOptions}
-                values={coatsValues}
-                filterMany={filterMany}
-              />
-            </AccordionPanel>
-          </AccordionItem>
-        </>
-      )}
-    </Accordion>
+    <VStack>
+      <Accordion
+        allowMultiple
+        defaultIndex={[0, 1, 2, 3, 4, 5, 6]}
+        w="300px"
+        flex="300px 0 0"
+      >
+        <AccordionItem>
+          <AccordionButton>
+            <Box flex="1" textAlign="left">
+              <FilterHeading>Type</FilterHeading>
+            </Box>
+            <AccordionIcon />
+          </AccordionButton>
+          <AccordionPanel pb={4}>
+            <RadioGroup
+              value={params.type}
+              onChange={(value) => filterOne("type", value)}
+            >
+              <Stack>
+                {ANIMAL_TYPES.map((type) => (
+                  <Radio key={type} value={type}>
+                    {type}
+                  </Radio>
+                ))}
+              </Stack>
+            </RadioGroup>
+          </AccordionPanel>
+        </AccordionItem>
+        {params.type === undefined ? null : (
+          <>
+            <AccordionItem>
+              <AccordionButton>
+                <Box flex="1" textAlign="left">
+                  <FilterHeading>Breed</FilterHeading>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+              <AccordionPanel pb={4}>
+                <TypeSelect
+                  name="breed"
+                  options={breedOptions}
+                  values={breedValues}
+                  filterMany={filterMany}
+                />
+              </AccordionPanel>
+            </AccordionItem>
+            <AccordionItem>
+              <AccordionButton>
+                <Box flex="1" textAlign="left">
+                  <FilterHeading>Gender</FilterHeading>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+              <AccordionPanel pb={4}>
+                <TypeSelect
+                  name="gender"
+                  options={genderOptions}
+                  values={genderValues}
+                  filterMany={filterMany}
+                />
+              </AccordionPanel>
+            </AccordionItem>
+            <AccordionItem>
+              <AccordionButton>
+                <Box flex="1" textAlign="left">
+                  <FilterHeading>Color</FilterHeading>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+              <AccordionPanel pb={4}>
+                <TypeSelect
+                  name="color"
+                  options={colorOptions}
+                  values={colorValues}
+                  filterMany={filterMany}
+                />
+              </AccordionPanel>
+            </AccordionItem>
+            <AccordionItem>
+              <AccordionButton>
+                <Box flex="1" textAlign="left">
+                  <FilterHeading>Size</FilterHeading>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+              <AccordionPanel pb={4}>
+                <TypeSelect
+                  name="size"
+                  options={sizeOptions}
+                  values={sizeValues}
+                  filterMany={filterMany}
+                />
+              </AccordionPanel>
+            </AccordionItem>
+            <AccordionItem>
+              <AccordionButton>
+                <Box flex="1" textAlign="left">
+                  <FilterHeading>Coat</FilterHeading>
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+              <AccordionPanel pb={4}>
+                <TypeSelect
+                  name="coat"
+                  options={coatsOptions}
+                  values={coatsValues}
+                  filterMany={filterMany}
+                />
+              </AccordionPanel>
+            </AccordionItem>
+          </>
+        )}
+      </Accordion>
+    </VStack>
   );
 };
 export default Filter;

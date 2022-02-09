@@ -1,4 +1,4 @@
-import { Button, HStack } from "@chakra-ui/react";
+import { Button, HStack, useBreakpointValue, VStack } from "@chakra-ui/react";
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
@@ -8,6 +8,7 @@ import { useParams } from "../context/params";
 import getAnimalList, { getAnimals } from "../fetch/getAnimals";
 import { Animal, Pagination } from "../types/animals";
 import useFilter from "../utils/useFilter";
+import useLargeScreen from "../utils/useLargeScreen";
 
 interface Props {
   animals: Animal[];
@@ -15,6 +16,8 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ animals, pagination }) => {
+  const isLargeScreen = useLargeScreen();
+
   const { params, setParams } = useParams();
 
   const [allAnimals, setAllAnimals] = useState(animals);
@@ -52,13 +55,21 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HStack align="flex-start">
-        <Filter params={params} filterOne={filterOne} filterMany={filterMany} />
-        <AnimalGrid animals={allAnimals} />
-        {!hasNextPage ? null : (
-          <Button isLoading={isFetching} onClick={fetchNextPage}>
-            More
-          </Button>
+        {!isLargeScreen ? null : (
+          <Filter
+            params={params}
+            filterOne={filterOne}
+            filterMany={filterMany}
+          />
         )}
+        <VStack w="full">
+          <AnimalGrid animals={allAnimals} />
+          {!hasNextPage ? null : (
+            <Button isLoading={isFetching} onClick={fetchNextPage}>
+              More
+            </Button>
+          )}
+        </VStack>
       </HStack>
     </>
   );
