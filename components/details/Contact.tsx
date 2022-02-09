@@ -15,6 +15,7 @@ import { MdLocationOn, MdMail, MdPhone } from "react-icons/md";
 import { Contact } from "../../types/animals";
 import { Organization, SocialMedia } from "../../types/Organization";
 import BlockQuote from "../BlockQuote";
+import GoogleMap from "./GoogleMap";
 import SocialIcon from "./SocialIcon";
 
 interface ContactProps extends StackProps {
@@ -68,10 +69,13 @@ const Contact: React.FC<ContactProps> = ({ organization, ...props }) => {
         </HStack>
       )}
       {!address.length ? null : (
-        <HStack fontSize="1rem" textAlign="end">
-          <Icon as={MdLocationOn} />
-          <Text>{address}</Text>
-        </HStack>
+        <>
+          <HStack fontSize="1rem" textAlign="end">
+            <Icon as={MdLocationOn} />
+            <Text>{address}</Text>
+          </HStack>
+          <GoogleMap address={address} />
+        </>
       )}
       {organization.mission_statement === null ? null : (
         <BlockQuote bgColor="purple.500">
