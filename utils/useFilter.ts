@@ -14,12 +14,7 @@ interface Props {
   fetcher: (AnimalParams: AnimalParams) => Promise<Animal[]>;
   setter: Dispatch<SetStateAction<Animal[]>>;
 }
-const useFilter = <AnimalParams, Animal>({
-  params,
-  setParams,
-  fetcher,
-  setter,
-}: Props) => {
+const useFilter = ({ params, setParams, fetcher, setter }: Props) => {
   const toastError = useToastError();
   useEffect(() => {
     (async () => {

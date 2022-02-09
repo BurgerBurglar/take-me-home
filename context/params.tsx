@@ -3,9 +3,11 @@ import React, {
   Dispatch,
   SetStateAction,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import { AnimalParams } from "../types/animals";
+import isClientSide from "../utils/isClientSide";
 
 export interface ParamsContextProps {
   params: AnimalParams;
@@ -18,7 +20,15 @@ const ParamsContext = createContext<ParamsContextProps>({
 });
 
 const ParamsProvider: React.FC = ({ children }) => {
-  const [params, setParams] = useState<AnimalParams>({});
+  const location = isClientSide()
+    ? localStorage.getItem("zipcode") ?? undefined
+    : undefined;
+  const [params, setParams] = useState<AnimalParams>({ location });
+  useEffect(() => {
+    if (params.location !== undefined) {
+      localStorage.setItem("zipcode", params.location);
+    }
+  }, [params.location]);
   return (
     <ParamsContext.Provider value={{ params, setParams }}>
       {children}

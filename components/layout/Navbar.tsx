@@ -21,6 +21,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import nullifyEmpty from "../../utils/nullifyEmpty";
 import { useRouter } from "next/router";
 import Link from "../NextLink";
+import isClientSide from "../../utils/isClientSide";
 
 const Navbar: React.FC = (props) => {
   const isLargeScreen = useScreenSize("md");
@@ -30,7 +31,10 @@ const Navbar: React.FC = (props) => {
 
     const { params, setParams } = useParams();
     const [name, setName] = useState(params.name ?? "");
-    const [zipcode, setZipcode] = useState("");
+    const initialZipcode = isClientSide()
+      ? localStorage.getItem("zipcode") ?? ""
+      : "";
+    const [zipcode, setZipcode] = useState(initialZipcode);
 
     const isValidLocation = zipcode.length === 5;
 
