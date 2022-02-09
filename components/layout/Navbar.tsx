@@ -20,6 +20,7 @@ import useScreenSize from "../../utils/useScreenSize";
 import { GiHamburgerMenu } from "react-icons/gi";
 import nullifyEmpty from "../../utils/nullifyEmpty";
 import { useRouter } from "next/router";
+import Link from "../Link";
 
 const Navbar: React.FC = (props) => {
   const isLargeScreen = useScreenSize("md");
@@ -126,7 +127,7 @@ const Navbar: React.FC = (props) => {
     <Flex {...props} bg="purple.600" align="center" color="white" h="3rem">
       <Container maxW="container.xl" display="flex" alignContent="center">
         <Heading as="h1" fontSize="2rem">
-          Pet Finder
+          <Link href="/">Pet Finder</Link>
         </Heading>
         <Spacer />
         {isLargeScreen ? (
