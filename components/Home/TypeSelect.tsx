@@ -1,7 +1,7 @@
 import React from "react";
 import ReactSelect from "react-select";
-import { MultiChoiceAnimalParam } from "../types/animals";
-import getSelectObjs, { Option } from "../utils/getSelectOptions";
+import { MultiChoiceAnimalParam } from "../../types/animals";
+import getSelectObjs, { Option } from "../../utils/getSelectOptions";
 
 interface SelectProps {
   name: MultiChoiceAnimalParam;

@@ -1,6 +1,5 @@
 import {
   Box,
-  Flex,
   Heading,
   LinkBox,
   LinkOverlay,
@@ -10,11 +9,11 @@ import {
   Wrap,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import React, { MouseEvent, useState } from "react";
-import { Animal } from "../types/animals";
-import defaultPic from "../utils/defaultPic";
-import useHover from "../utils/useHover";
-import NextImage from "./NextImage";
+import React from "react";
+import { Animal } from "../../types/animals";
+import defaultPic from "../../utils/defaultPic";
+import useHover from "../../utils/useHover";
+import NextImage from "../NextImage";
 
 interface AnimalCardProps {
   animal: Animal;

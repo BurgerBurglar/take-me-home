@@ -12,17 +12,17 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import React from "react";
-import { getColors } from "../fetch/getAnimalTypeDetails";
-import getBreeds from "../fetch/getBreeds";
+import { getColors } from "../../fetch/getAnimalTypeDetails";
+import getBreeds from "../../fetch/getBreeds";
 import {
   AnimalParams,
-  MultiChoiceAnimalParam,
   SingleChoiceAnimalParam,
-} from "../types/animals";
-import { ANIMAL_TYPES } from "../utils/constants";
-import splitParam from "../utils/splitParam";
-import useFetchFilter from "../utils/useFetchFilter";
-import useScreenSize from "../utils/useScreenSize";
+  MultiChoiceAnimalParam,
+} from "../../types/animals";
+import { ANIMAL_TYPES } from "../../utils/constants";
+import splitParam from "../../utils/splitParam";
+import useFetchFilter from "../../utils/useFetchFilter";
+import useScreenSize from "../../utils/useScreenSize";
 import TypeSelect from "./TypeSelect";
 
 interface FilterHeadingProps extends HeadingProps {}

@@ -1,6 +1,6 @@
 import { SimpleGrid } from "@chakra-ui/react";
 import React from "react";
-import { Animal } from "../types/animals";
+import { Animal } from "../../types/animals";
 import AnimalCard from "./AnimalCard";
 
 interface AnimalListProps {
