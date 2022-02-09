@@ -24,16 +24,28 @@ const Animal: NextPage<Props> = ({ animal, organization }) => {
         bg="purple.50"
       >
         <NextImage
+          priority
           src={animal.photos[0]?.full ?? defaultPic(animal)}
           alt={animal.name}
-          w="800px"
-          h="500px"
-          priority
+          width="full"
+          height="500px"
+          chakraProps={{
+            maxW: "800px",
+          }}
         />
       </Stack>
-      <Stack direction="row" align="start" spacing={5} px={3}>
-        <Intro animal={animal} flex="1 1 0" />
-        <Contact organization={organization} w="25rem" />
+      <Stack
+        direction={{ base: "column", md: "row" }}
+        align="start"
+        spacing={5}
+        px={3}
+      >
+        <Intro animal={animal} flex={{ base: undefined, md: "3 3 60rem" }} />
+        <Contact
+          organization={organization}
+          w="full"
+          flex={{ base: undefined, md: "1 1 25rem" }}
+        />
       </Stack>
     </Stack>
   );

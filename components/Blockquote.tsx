@@ -9,7 +9,7 @@ const BlockQuote: React.FC<BlockQuoteProps> = ({
   bgColor = "gray.50",
 }) => {
   return (
-    <Text as="blockquote" bgColor={bgColor} p={5}>
+    <Text as="blockquote" bgColor={bgColor} textAlign="start" p={5}>
       <Icon as={FaQuoteLeft} color="purple.400" mr={2} />
       {children}
     </Text>

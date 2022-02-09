@@ -35,8 +35,15 @@ const Contact: React.FC<ContactProps> = ({ organization, ...props }) => {
   );
 
   return (
-    <VStack bgColor="purple.600" color="gray.200" rounded="xl" p={5} {...props}>
-      <HStack fontSize="1.5rem" spacing={3} color="white">
+    <VStack
+      bgColor="purple.600"
+      color="gray.200"
+      rounded="xl"
+      textAlign="center"
+      p={5}
+      {...props}
+    >
+      <HStack fontSize="1.5rem" color="white">
         <FaPaw />
         <Heading as="h3">Take me home!</Heading>
         <FaPaw />

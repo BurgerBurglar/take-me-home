@@ -1,21 +1,25 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, BoxProps } from "@chakra-ui/react";
 import Image, { ImageProps } from "next/image";
 import React from "react";
 
 interface NextImageProps extends ImageProps {
   src: string;
   alt: string;
-  w: string;
-  h: string;
+  chakraProps?: BoxProps;
 }
 
-const NextImage: React.FC<NextImageProps> = ({ src, alt, w, h, ...props }) => {
+const NextImage: React.FC<NextImageProps> = ({
+  src,
+  alt,
+  width,
+  height,
+  chakraProps,
+  ...props
+}) => {
   return (
-    <Flex>
-      <Box position="relative" w={w} h={h}>
-        <Image src={src} alt={alt} layout="fill" objectFit="cover" {...props} />
-      </Box>
-    </Flex>
+    <Box position="relative" w={width} h={height} {...chakraProps}>
+      <Image src={src} alt={alt} layout="fill" objectFit="cover" {...props} />
+    </Box>
   );
 };
 export default NextImage;
