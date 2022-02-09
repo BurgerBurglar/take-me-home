@@ -1,5 +1,3 @@
-import { IconButton, Link } from "@chakra-ui/react";
-import NextLink from "next/link";
 import React from "react";
 import { IconType } from "react-icons";
 import {
@@ -10,6 +8,7 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { SocialMedia } from "../../types/Organization";
+import Link from "../Link";
 
 interface SocialIconProps {
   platform: keyof SocialMedia;
@@ -27,11 +26,9 @@ const SocialIcon: React.FC<SocialIconProps> = ({ platform, url }) => {
   };
   const Icon = iconMap[platform];
   return (
-    <NextLink href={url} passHref>
-      <Link fontSize="1.5rem">
-        <Icon />
-      </Link>
-    </NextLink>
+    <Link href={url} chakraProps={{ fontSize: "1.5rem" }}>
+      <Icon />
+    </Link>
   );
 };
 export default SocialIcon;

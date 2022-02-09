@@ -2,19 +2,19 @@ import {
   Heading,
   HStack,
   Icon,
-  Link,
   StackProps,
   Text,
   VStack,
   Wrap,
 } from "@chakra-ui/react";
-import NextLink from "next/link";
+
 import React from "react";
 import { FaPaw } from "react-icons/fa";
 import { MdLocationOn, MdMail, MdPhone } from "react-icons/md";
 import { Contact } from "../../types/animals";
 import { Organization, SocialMedia } from "../../types/Organization";
-import BlockQuote from "../BlockQuote";
+import Blockquote from "../Blockquote";
+import Link from "../Link";
 import GoogleMap from "./GoogleMap";
 import SocialIcon from "./SocialIcon";
 
@@ -53,26 +53,22 @@ const Contact: React.FC<ContactProps> = ({ organization, ...props }) => {
           {organization.website === null ? (
             organization.name
           ) : (
-            <NextLink href={organization.website} passHref>
-              <Link>{organization.name}</Link>
-            </NextLink>
+            <Link href={organization.website}>{organization.name}</Link>
           )}
         </Heading>
       </HStack>
       {!organization.email ? null : (
         <HStack fontSize="1.2rem">
           <Icon as={MdMail} />
-          <NextLink href={`mailto:${organization.email}`} passHref>
-            <Link>{organization.email}</Link>
-          </NextLink>
+          <Link href={`mailto:${organization.email}`}>
+            {organization.email}
+          </Link>
         </HStack>
       )}
       {!organization.phone ? null : (
         <HStack fontSize="1.2rem">
           <Icon as={MdPhone} />
-          <NextLink href={`tel:${organization.phone}`} passHref>
-            <Link>{organization.phone}</Link>
-          </NextLink>
+          <Link href={`tel:${organization.phone}`}>{organization.phone}</Link>
         </HStack>
       )}
       {!address.length ? null : (
@@ -85,9 +81,9 @@ const Contact: React.FC<ContactProps> = ({ organization, ...props }) => {
         </>
       )}
       {organization.mission_statement === null ? null : (
-        <BlockQuote bgColor="purple.500">
+        <Blockquote bgColor="purple.500">
           {organization.mission_statement}
-        </BlockQuote>
+        </Blockquote>
       )}
       <Wrap spacing={5}>
         {socialMedia.map((social) => (

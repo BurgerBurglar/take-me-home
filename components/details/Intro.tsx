@@ -11,11 +11,10 @@ import {
   Wrap,
 } from "@chakra-ui/react";
 import React from "react";
-import { FaQuoteLeft } from "react-icons/fa";
 import { MdFemale, MdMale } from "react-icons/md";
 import { Animal } from "../../types/animals";
 import joinValues from "../../utils/joinValues";
-import BlockQuote from "../BlockQuote";
+import Blockquote from "../Blockquote";
 
 interface IntroProps extends StackProps {
   animal: Animal;
@@ -60,7 +59,7 @@ const Intro: React.FC<IntroProps> = ({ animal, ...props }) => {
           </Tag>
         ))}
       </Wrap>
-      <BlockQuote>{animal.description}</BlockQuote>
+      <Blockquote>{animal.description}</Blockquote>
       <Heading as="h3" fontSize="1.5rem" color="purple.700">
         Let&apos;s get to know each other!
       </Heading>

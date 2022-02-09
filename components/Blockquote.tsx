@@ -4,7 +4,7 @@ import { FaQuoteLeft } from "react-icons/fa";
 
 interface BlockQuoteProps extends TextProps {}
 
-const BlockQuote: React.FC<BlockQuoteProps> = ({
+const Blockquote: React.FC<BlockQuoteProps> = ({
   children,
   bgColor = "gray.50",
 }) => {
@@ -15,4 +15,4 @@ const BlockQuote: React.FC<BlockQuoteProps> = ({
     </Text>
   );
 };
-export default BlockQuote;
+export default Blockquote;
