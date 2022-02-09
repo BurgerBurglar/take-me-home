@@ -1,6 +1,5 @@
 import axios from "axios";
 import { AnimalList, AnimalParams } from "../types/animals";
-import getAnimalsWithPhoto from "../utils/getAnimalsWithPhoto";
 import getHeaders from "./getHeaders";
 
 const getAnimalList = async (params: AnimalParams = {}) => {
@@ -13,9 +12,8 @@ const getAnimalList = async (params: AnimalParams = {}) => {
     }
   );
   const { animals, pagination } = response.data;
-  const animalsWithPhoto = getAnimalsWithPhoto(animals);
   return {
-    animals: animalsWithPhoto,
+    animals,
     pagination,
   };
 };

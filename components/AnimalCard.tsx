@@ -1,6 +1,7 @@
 import { Box, Flex, Heading, Stack, Tag, Text, Wrap } from "@chakra-ui/react";
 import React from "react";
 import { Animal } from "../types/animals";
+import defaultPic from "../utils/defaultPic";
 import NextImage from "./NextImage";
 
 interface AnimalCardProps {
@@ -21,7 +22,7 @@ const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
         shadow="md"
       >
         <NextImage
-          src={animal.primary_photo_cropped!.small}
+          src={animal.primary_photo_cropped?.small ?? defaultPic(animal)}
           alt={animal.name}
           w="full"
           h="300px"
