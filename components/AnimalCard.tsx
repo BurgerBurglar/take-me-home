@@ -26,8 +26,8 @@ const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
           w="full"
           h="300px"
         />
-        <Stack direction="column" spacing={2} justify="center" p={3}>
-          <Heading as="h3" style={{ display: "inline" }}>
+        <Stack direction="column" spacing={2} justify="center" p={5} pt={3}>
+          <Heading as="h3" color="purple.700">
             {animal.name}
             {animal.distance === null ? null : (
               <Box
