@@ -5,6 +5,7 @@ import {
   MultiChoiceAnimalParam,
   SingleChoiceAnimalParam,
 } from "../types/animals";
+import useToastError from "./useToastError";
 
 interface Props {
   params: AnimalParams;
@@ -18,12 +19,18 @@ const useFilter = <AnimalParams, Animal>({
   fetcher,
   setter,
 }: Props) => {
+  const toastError = useToastError();
   useEffect(() => {
     (async () => {
-      const Animal = await fetcher(params);
-      setter(Animal);
+      try {
+        const animals = await fetcher(params);
+        setter(animals);
+      } catch (err) {
+        toastError();
+      }
     })();
-  }, [fetcher, params, setter]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [params]);
 
   const filterOne = (field: SingleChoiceAnimalParam, value: string) => {
     if (field === "type") {

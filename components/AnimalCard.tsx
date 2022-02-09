@@ -1,4 +1,4 @@
-import { Flex, Heading, Stack, Tag, Text, Wrap } from "@chakra-ui/react";
+import { Box, Flex, Heading, Stack, Tag, Text, Wrap } from "@chakra-ui/react";
 import React from "react";
 import { Animal } from "../types/animals";
 import htmlUnescape from "../utils/htmlUnescape";
@@ -28,7 +28,19 @@ const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
           h="400px"
         />
         <Stack direction="column" spacing={2} justify="center" p={3}>
-          <Heading as="h3">{animal.name}</Heading>
+          <Heading as="h3" style={{ display: "inline" }}>
+            {animal.name}
+            {animal.distance === null ? null : (
+              <Box
+                as="span"
+                fontSize="1.2rem"
+                fontWeight="normal"
+                color="gray.500"
+              >
+                , {parseInt(animal.distance)} miles
+              </Box>
+            )}
+          </Heading>
           <Text>{overview.join(" · ")}</Text>
           <Text>{animal.breeds.primary}</Text>
           <Wrap>

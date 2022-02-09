@@ -4,6 +4,7 @@ import Head from "next/head";
 import { useState } from "react";
 import AnimalList from "../components/AnimalList";
 import Filter from "../components/Filter";
+import { useParams } from "../context/params";
 import getAnimalList, { getAnimals } from "../fetch/getAnimals";
 import { Animal, AnimalParams, Pagination } from "../types/animals";
 import useFilter from "../utils/useFilter";
@@ -14,10 +15,11 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ animals, pagination }) => {
+  const { params, setParams } = useParams();
+
   const [allAnimals, setAllAnimals] = useState(animals);
   const initialPage = pagination.current_page;
   const initialTotalPages = pagination.total_pages;
-  const [params, setParams] = useState<AnimalParams>({});
 
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [totalPages, setTotalPages] = useState(initialTotalPages);

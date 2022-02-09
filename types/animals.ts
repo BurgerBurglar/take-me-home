@@ -133,6 +133,8 @@ export interface AnimalParams {
   name?: string;
   sort?: string;
   page?: number;
+  location?: string;
+  distance?: number;
 }
 
 export type SingleChoiceAnimalParam = "type" | "sort";

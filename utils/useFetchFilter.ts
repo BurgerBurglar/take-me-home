@@ -1,12 +1,12 @@
-import { useToast } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import useToastError from "./useToastError";
 
 const useFetchFilter = (
   type: string | undefined,
   fetcher: (type: string) => Promise<string[]>
 ) => {
   const [values, setBreeds] = useState<string[]>([]);
-  const toast = useToast();
+  const toastError = useToastError();
   useEffect(() => {
     const fetch = async () => {
       if (type === undefined) return;
@@ -14,13 +14,7 @@ const useFetchFilter = (
         const data = await fetcher(type);
         setBreeds(data);
       } catch (err) {
-        toast({
-          title: "that didnt work",
-          description: "Try again?",
-          status: "error",
-          duration: 5000,
-          isClosable: true,
-        });
+        toastError();
       }
     };
     fetch();
