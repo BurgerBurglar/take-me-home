@@ -43,6 +43,7 @@ const Contact: React.FC<ContactProps> = ({ organization, ...props }) => {
   return (
     <VStack
       position="relative"
+      spacing={3}
       bgColor="purple.600"
       color="gray.200"
       rounded="xl"
