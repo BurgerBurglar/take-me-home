@@ -19,11 +19,14 @@ import { useParams } from "../../context/params";
 import useScreenSize from "../../utils/useScreenSize";
 import { GiHamburgerMenu } from "react-icons/gi";
 import nullifyEmpty from "../../utils/nullifyEmpty";
+import { useRouter } from "next/router";
 
 const Navbar: React.FC = (props) => {
   const isLargeScreen = useScreenSize("md");
 
   const Filters: React.FC = () => {
+    const router = useRouter();
+
     const { params, setParams } = useParams();
     const [name, setName] = useState("");
     const [zipcode, setZipcode] = useState("");
@@ -40,6 +43,7 @@ const Navbar: React.FC = (props) => {
 
     const searchName = () => {
       const realName = nullifyEmpty(name);
+      router.push("/");
       setParams((prev) => ({
         ...prev,
         name: realName,

@@ -48,8 +48,8 @@ const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
         <NextImage
           src={animal.primary_photo_cropped?.small ?? defaultPic(animal)}
           alt={animal.name}
-          w="full"
-          h="300px"
+          width="full"
+          height="300px"
         />
         <Stack direction="column" spacing={2} justify="center" p={5} pt={3}>
           <Heading as="h3" fontSize="1.8rem" color="purple.700">
