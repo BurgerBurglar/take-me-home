@@ -52,7 +52,7 @@ const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
         />
         <Stack direction="column" spacing={2} justify="center" p={5} pt={3}>
           <Heading as="h3" fontSize="1.8rem" color="purple.700">
-            <NextLink href={`/animal/${animal.id}`} passHref>
+            <NextLink href={`/animals/${animal.id}`} passHref>
               <LinkOverlay>{animal.name}</LinkOverlay>
             </NextLink>
             {animal.distance === null ? null : (
