@@ -1,4 +1,4 @@
-import { Button, HStack, useBreakpointValue, VStack } from "@chakra-ui/react";
+import { Button, Stack, VStack } from "@chakra-ui/react";
 import type { GetStaticProps, NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
@@ -54,14 +54,8 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
         <title>Pet Finder</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <HStack align="flex-start">
-        {!isLargeScreen ? null : (
-          <Filter
-            params={params}
-            filterOne={filterOne}
-            filterMany={filterMany}
-          />
-        )}
+      <Stack direction={isLargeScreen ? "row" : "column"} align="flex-start">
+        <Filter params={params} filterOne={filterOne} filterMany={filterMany} />
         <VStack w="full">
           <AnimalGrid animals={allAnimals} />
           {!hasNextPage ? null : (
@@ -70,7 +64,7 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
             </Button>
           )}
         </VStack>
-      </HStack>
+      </Stack>
     </>
   );
 };
