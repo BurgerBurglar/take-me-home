@@ -49,6 +49,13 @@ const Contact: React.FC<ContactProps> = ({ organization, ...props }) => {
       textAlign="center"
       p={5}
       pt="2rem"
+      sx={{
+        a: {
+          _hover: {
+            color: "white",
+          },
+        },
+      }}
       {...props}
     >
       <Box
@@ -86,7 +93,14 @@ const Contact: React.FC<ContactProps> = ({ organization, ...props }) => {
           {organization.website === null ? (
             organization.name
           ) : (
-            <Link href={organization.website}>{organization.name}</Link>
+            <Link
+              href={organization.website}
+              chakraProps={{
+                textDecor: "underline",
+              }}
+            >
+              {organization.name}
+            </Link>
           )}
         </Heading>
       </HStack>
@@ -108,7 +122,9 @@ const Contact: React.FC<ContactProps> = ({ organization, ...props }) => {
         <>
           <HStack fontSize="1rem" textAlign="end">
             <Icon as={MdLocationOn} />
-            <Text>{address}</Text>
+            <Link href={`https://www.google.com/maps/place/${address}`}>
+              {address}
+            </Link>
           </HStack>
           <GoogleMap address={address} />
         </>
