@@ -8,7 +8,7 @@ const getAnimalList = async (params: AnimalParams = {}) => {
     "https://api.petfinder.com/v2/animals",
     {
       headers,
-      params: { ...params, limit: 100 },
+      params: { ...params, limit: 48 },
     }
   );
   const { animals, pagination } = response.data;
