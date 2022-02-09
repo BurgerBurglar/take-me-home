@@ -10,9 +10,10 @@ import {
   Wrap,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import React from "react";
+import React, { MouseEvent, useState } from "react";
 import { Animal } from "../types/animals";
 import defaultPic from "../utils/defaultPic";
+import useHover from "../utils/useHover";
 import NextImage from "./NextImage";
 
 interface AnimalCardProps {
@@ -22,6 +23,9 @@ interface AnimalCardProps {
 const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
   const overview = [animal.species, animal.gender, animal.age];
   const topTags = animal.tags.slice(0, 3);
+
+  const { isHovered, handleHover } = useHover();
+
   return (
     <>
       <LinkBox
@@ -38,6 +42,8 @@ const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
           transform: "translateY(-0.1rem)",
           transition: "transform 0.2s ease-in",
         }}
+        onMouseEnter={handleHover}
+        onMouseLeave={handleHover}
       >
         <NextImage
           src={animal.primary_photo_cropped?.small ?? defaultPic(animal)}
@@ -67,7 +73,9 @@ const AnimalCard: React.FC<AnimalCardProps> = ({ animal }) => {
           </Box>
           <Wrap>
             {topTags.map((tag) => (
-              <Tag key={tag}>{tag}</Tag>
+              <Tag key={tag} colorScheme={isHovered ? "purple" : "gray"}>
+                {tag}
+              </Tag>
             ))}
           </Wrap>
         </Stack>
