@@ -8,7 +8,7 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 import { SocialMedia } from "../../types/Organization";
-import Link from "../Link";
+import Link from "../NextLink";
 
 interface SocialIconProps {
   platform: keyof SocialMedia;

@@ -20,7 +20,7 @@ import useScreenSize from "../../utils/useScreenSize";
 import { GiHamburgerMenu } from "react-icons/gi";
 import nullifyEmpty from "../../utils/nullifyEmpty";
 import { useRouter } from "next/router";
-import Link from "../Link";
+import Link from "../NextLink";
 
 const Navbar: React.FC = (props) => {
   const isLargeScreen = useScreenSize("md");

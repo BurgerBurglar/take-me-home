@@ -14,7 +14,7 @@ import { MdLocationOn, MdMail, MdPhone } from "react-icons/md";
 import { Contact } from "../../types/animals";
 import { Organization, SocialMedia } from "../../types/Organization";
 import Blockquote from "../Blockquote";
-import Link from "../Link";
+import Link from "../NextLink";
 import GoogleMap from "./GoogleMap";
 import SocialIcon from "./SocialIcon";
 
