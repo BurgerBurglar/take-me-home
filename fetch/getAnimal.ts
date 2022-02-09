@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Animal, AnimalList } from "../types/animals";
+import { Animal } from "../types/animals";
 import getHeaders from "./getHeaders";
 
 const getAnimal = async (id: number) => {

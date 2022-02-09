@@ -15,6 +15,7 @@ import { FaQuoteLeft } from "react-icons/fa";
 import { MdFemale, MdMale } from "react-icons/md";
 import { Animal } from "../../types/animals";
 import joinValues from "../../utils/joinValues";
+import BlockQuote from "../BlockQuote";
 
 interface IntroProps extends StackProps {
   animal: Animal;
@@ -59,10 +60,7 @@ const Intro: React.FC<IntroProps> = ({ animal, ...props }) => {
           </Tag>
         ))}
       </Wrap>
-      <Text as="blockquote" bgColor="gray.50" p={5}>
-        <Icon as={FaQuoteLeft} color="gray.400" mr={2} />
-        {animal.description}
-      </Text>
+      <BlockQuote>{animal.description}</BlockQuote>
       <Heading as="h3" fontSize="1.5rem" color="purple.700">
         Let&apos;s get to know each other!
       </Heading>

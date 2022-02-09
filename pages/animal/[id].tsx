@@ -4,13 +4,16 @@ import Contact from "../../components/details/Contact";
 import Intro from "../../components/details/Intro";
 import NextImage from "../../components/NextImage";
 import getAnimal from "../../fetch/getAnimal";
+import getOrganization from "../../fetch/getOrganization";
 import { Animal } from "../../types/animals";
+import { Organization } from "../../types/Organization";
 import defaultPic from "../../utils/defaultPic";
 
 interface Props {
   animal: Animal;
+  organization: Organization;
 }
-const Animal: NextPage<Props> = ({ animal }) => {
+const Animal: NextPage<Props> = ({ animal, organization }) => {
   return (
     <Stack spacing={5}>
       <Stack
@@ -30,7 +33,7 @@ const Animal: NextPage<Props> = ({ animal }) => {
       </Stack>
       <Stack direction="row" align="start" spacing={5} px={3}>
         <Intro animal={animal} flex="1 1 0" />
-        <Contact contact={animal.contact} minW="25rem" />
+        <Contact organization={organization} w="25rem" />
       </Stack>
     </Stack>
   );
@@ -40,7 +43,8 @@ export const getServerSideProps: GetServerSideProps<Props> = async ({
 }) => {
   try {
     const animal = await getAnimal(parseInt(params?.id as string));
-    return { props: { animal } };
+    const organization = await getOrganization(animal.organization_id);
+    return { props: { animal, organization } };
   } catch (err) {
     console.error(err);
     return { notFound: true };

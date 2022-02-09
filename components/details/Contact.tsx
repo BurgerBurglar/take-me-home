@@ -1,54 +1,72 @@
 import {
-  VStack,
-  HStack,
   Heading,
+  HStack,
   Icon,
   Link,
-  Text,
   StackProps,
+  Text,
+  VStack,
 } from "@chakra-ui/react";
+import NextLink from "next/link";
 import React from "react";
 import { FaPaw } from "react-icons/fa";
-import { MdMail, MdPhone, MdLocationOn } from "react-icons/md";
+import { MdLocationOn, MdMail, MdPhone } from "react-icons/md";
 import { Contact } from "../../types/animals";
+import { Organization } from "../../types/Organization";
+import BlockQuote from "../BlockQuote";
 
-import NextLink from "next/link";
 interface ContactProps extends StackProps {
-  contact: Contact;
+  organization: Organization;
 }
 
-const Contact: React.FC<ContactProps> = ({ contact, ...props }) => {
-  const address = Object.values(contact.address)
+const Contact: React.FC<ContactProps> = ({ organization, ...props }) => {
+  const address = Object.values(organization.address)
     .filter((field) => field)
     .join(", ");
   return (
-    <VStack bgColor="purple.600" color="white" rounded="xl" p={5} {...props}>
-      <HStack fontSize="1.5rem" spacing={3}>
+    <VStack bgColor="purple.600" color="gray.200" rounded="xl" p={5} {...props}>
+      <HStack fontSize="1.5rem" spacing={3} color="white">
         <FaPaw />
         <Heading as="h3">Take me home!</Heading>
         <FaPaw />
       </HStack>
-      {!contact.email ? null : (
+      <HStack textAlign="center">
+        <Heading as="h4" fontSize="1.3rem">
+          {organization.website === null ? (
+            organization.name
+          ) : (
+            <NextLink href={organization.website} passHref>
+              <Link>{organization.name}</Link>
+            </NextLink>
+          )}
+        </Heading>
+      </HStack>
+      {!organization.email ? null : (
         <HStack fontSize="1.2rem">
           <Icon as={MdMail} />
-          <NextLink href={`mailto:${contact.email}`} passHref>
-            <Link>{contact.email}</Link>
+          <NextLink href={`mailto:${organization.email}`} passHref>
+            <Link>{organization.email}</Link>
           </NextLink>
         </HStack>
       )}
-      {!contact.phone ? null : (
+      {!organization.phone ? null : (
         <HStack fontSize="1.2rem">
           <Icon as={MdPhone} />
-          <NextLink href={`tel:${contact.phone}`} passHref>
-            <Link>{contact.phone}</Link>
+          <NextLink href={`tel:${organization.phone}`} passHref>
+            <Link>{organization.phone}</Link>
           </NextLink>
         </HStack>
       )}
-      {!contact.address ? null : (
-        <HStack fontSize="1.2rem">
+      {!address.length ? null : (
+        <HStack fontSize="1rem" textAlign="end">
           <Icon as={MdLocationOn} />
           <Text>{address}</Text>
         </HStack>
+      )}
+      {organization.mission_statement === null ? null : (
+        <BlockQuote bgColor="purple.500">
+          {organization.mission_statement}
+        </BlockQuote>
       )}
     </VStack>
   );
