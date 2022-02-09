@@ -14,12 +14,12 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { useParams } from "../../context/params";
 import { MdSearch } from "react-icons/md";
 
-const isValidLocation = (zipcode: string) => zipcode.length === 5;
-
 const Navbar: React.FC = (props) => {
   const { params, setParams } = useParams();
   const [name, setName] = useState("");
   const [zipcode, setZipcode] = useState("");
+
+  const isValidLocation = zipcode.length === 5;
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -37,12 +37,12 @@ const Navbar: React.FC = (props) => {
   };
 
   useEffect(() => {
-    if (!isValidLocation(zipcode)) return;
+    if (!isValidLocation) return;
     setParams((prev) => ({
       ...prev,
       location: zipcode,
     }));
-  }, [setParams, zipcode]);
+  }, [isValidLocation, setParams, zipcode]);
 
   const handleDistanceChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setParams((prev) => ({
@@ -95,6 +95,7 @@ const Navbar: React.FC = (props) => {
           <VisuallyHidden>distance</VisuallyHidden>
           <Select
             name="distance"
+            isDisabled={!isValidLocation}
             value={params.distance}
             onChange={handleDistanceChange}
             defaultValue={100}
