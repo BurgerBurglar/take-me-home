@@ -3,6 +3,7 @@ import { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Contact from "../../components/details/Contact";
 import Intro from "../../components/details/Intro";
+import Slides from "../../components/details/Slides";
 import NextImage from "../../components/NextImage";
 import getAnimal from "../../fetch/getAnimal";
 import getOrganization from "../../fetch/getOrganization";
@@ -15,30 +16,32 @@ interface Props {
   organization: Organization;
 }
 const Animal: NextPage<Props> = ({ animal, organization }) => {
+  const photoUrls =
+    animal.photos.length === 0
+      ? [defaultPic(animal)]
+      : animal.photos.map(({ full }) => full);
   return (
     <>
       <Head>
         <title>{animal.name} - Take Me Home</title>
       </Head>
       <Stack spacing={5}>
-        <Stack
-          direction="row"
-          spacing={5}
-          justify="center"
-          align="center"
-          bg="purple.50"
-        >
-          <NextImage
-            priority
-            src={animal.photos[0]?.full ?? defaultPic(animal)}
-            alt={animal.name}
-            width="full"
-            height="500px"
-            chakraProps={{
-              maxW: "800px",
-            }}
-          />
-        </Stack>
+        <Slides>
+          {photoUrls.map((photoUrl) => (
+            <NextImage
+              key={photoUrl}
+              priority
+              src={photoUrl}
+              alt={animal.name}
+              width="full"
+              height="500px"
+              chakraProps={{
+                maxW: "800px",
+              }}
+            />
+          ))}
+        </Slides>
+        {/* </Stack> */}
         <Stack
           direction={{ base: "column", md: "row" }}
           align="start"
