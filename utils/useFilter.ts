@@ -11,12 +11,21 @@ import useToastError from "./useToastError";
 interface Props {
   params: AnimalParams;
   setParams: Dispatch<SetStateAction<AnimalParams>>;
+  setAllAnimals: Dispatch<SetStateAction<Animal[]>>;
   fetcher: (AnimalParams: AnimalParams) => Promise<Animal[]>;
   setter: Dispatch<SetStateAction<Animal[]>>;
 }
-const useFilter = ({ params, setParams, fetcher, setter }: Props) => {
+const useFilter = ({
+  params,
+  setParams,
+  setAllAnimals,
+  fetcher,
+  setter,
+}: Props) => {
   const toastError = useToastError();
+
   useEffect(() => {
+    setAllAnimals([]);
     (async () => {
       try {
         const animals = await fetcher(params);

@@ -1,31 +1,24 @@
 import { Button, Stack, VStack } from "@chakra-ui/react";
-import type { GetStaticProps, NextPage } from "next";
+import type { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
 import AnimalGrid from "../components/index/AnimalGrid";
 import Filter from "../components/index/Filter";
 import { useParams } from "../context/params";
 import getAnimalList, { getAnimals } from "../fetch/getAnimals";
-import { Animal, Pagination } from "../types/animals";
+import { Animal } from "../types/animals";
 import useFilter from "../utils/useFilter";
 import useScreenSize from "../utils/useScreenSize";
 
-interface Props {
-  animals: Animal[];
-  pagination: Pagination;
-}
-
-const Home: NextPage<Props> = ({ animals, pagination }) => {
+const Home: NextPage = () => {
   const isLargeScreen = useScreenSize("lg");
 
   const { params, setParams } = useParams();
 
-  const [allAnimals, setAllAnimals] = useState(animals);
-  const initialPage = pagination.current_page;
-  const initialTotalPages = pagination.total_pages;
+  const [allAnimals, setAllAnimals] = useState<Animal[]>([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
-  const [currentPage, setCurrentPage] = useState(initialPage);
-  const [totalPages, setTotalPages] = useState(initialTotalPages);
   const [isFetching, setIsFetching] = useState(false);
   const hasNextPage = totalPages > currentPage;
   const fetchNextPage = async () => {
@@ -44,6 +37,7 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
   const { filterOne, filterMany } = useFilter({
     params,
     setParams,
+    setAllAnimals,
     fetcher: getAnimals,
     setter: setAllAnimals,
   });
@@ -67,16 +61,6 @@ const Home: NextPage<Props> = ({ animals, pagination }) => {
       </Stack>
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps<Props> = async () => {
-  const { animals, pagination } = await getAnimalList();
-  return {
-    props: {
-      animals,
-      pagination,
-    },
-  };
 };
 
 export default Home;

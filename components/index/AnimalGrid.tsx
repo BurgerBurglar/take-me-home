@@ -8,11 +8,20 @@ interface AnimalListProps {
 }
 
 const AnimalGrid: React.FC<AnimalListProps> = ({ animals }) => {
+  let cards: JSX.Element[] = [];
+
+  if (animals.length === 0) {
+    const range9 = Array.from({ length: 9 }, (_, i) => i);
+    cards = range9.map((i) => <AnimalCard key={i} />);
+  } else {
+    cards = animals.map((animal) => (
+      <AnimalCard key={animal.id} animal={animal} />
+    ));
+  }
+
   return (
     <SimpleGrid minChildWidth="min(300px, 100%)" spacing={3} w="full">
-      {animals.map((animal) => (
-        <AnimalCard key={animal.id} animal={animal} />
-      ))}
+      {cards}
     </SimpleGrid>
   );
 };
