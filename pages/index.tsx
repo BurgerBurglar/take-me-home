@@ -16,8 +16,8 @@ const Home: NextPage = () => {
   const { params, setParams } = useParams();
 
   const [allAnimals, setAllAnimals] = useState<Animal[]>([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(2);
 
   const [isFetching, setIsFetching] = useState(false);
   const hasNextPage = totalPages > currentPage;
