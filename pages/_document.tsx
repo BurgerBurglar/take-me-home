@@ -8,7 +8,7 @@ export default function Document() {
           name="description"
           content="Cute animals waiting for you to take home with."
         />
-        <meta name="x-robots-tag" content="all" />
+        <meta name="robots" content="index" />
       </Head>
       <body>
         <Main />
