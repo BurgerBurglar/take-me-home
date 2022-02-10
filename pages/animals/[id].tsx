@@ -25,8 +25,8 @@ const Animal: NextPage<Props> = ({ animal, organization }) => {
       <Head>
         <title>{animal.name} - Take Me Home</title>
       </Head>
-      <Stack spacing={5}>
-        <Slides>
+      <Stack spacing={12}>
+        <Slides bgColor="purple.50">
           {photoUrls.map((photoUrl) => (
             <NextImage
               key={photoUrl}
@@ -41,7 +41,6 @@ const Animal: NextPage<Props> = ({ animal, organization }) => {
             />
           ))}
         </Slides>
-        {/* </Stack> */}
         <Stack
           direction={{ base: "column", md: "row" }}
           align="start"

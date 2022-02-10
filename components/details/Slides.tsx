@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, FlexProps } from "@chakra-ui/react";
 import React, { Children, useState } from "react";
 import { Lazy, Navigation, Thumbs } from "swiper";
 import "swiper/css";
@@ -7,9 +7,9 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-interface SlidesProps {}
+interface SlidesProps extends FlexProps {}
 
-const Slides: React.FC<SlidesProps> = ({ children }) => {
+const Slides: React.FC<SlidesProps> = ({ children, ...props }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const images = () => (
     <>
@@ -39,6 +39,7 @@ const Slides: React.FC<SlidesProps> = ({ children }) => {
           opacity: 0.5,
         },
       }}
+      {...props}
     >
       <Swiper
         lazy
