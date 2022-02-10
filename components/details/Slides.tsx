@@ -53,6 +53,7 @@ const Slides: React.FC<SlidesProps> = ({ children }) => {
       </Swiper>
       {!isMultiSlides ? null : (
         <Swiper
+          // @ts-ignore
           onSwiper={setThumbsSwiper}
           lazy
           loop
